@@ -1,0 +1,107 @@
+[
+    {
+        "vulnerability": "Cross-site Scripting (XSS)",
+        "sources": [
+            "$_GET", 
+            "$_POST", 
+            "$_COOKIE"
+        ],
+        "sanitizers": [
+            "strip_tags", 
+            "htmlspecialchars", 
+            "addslashes"
+        ],
+        "sinks": [
+            "echo",
+            "print",
+            "print_r",
+            "exit"
+
+        ],
+        "implicit": "yes"
+    },
+    {
+        "vulnerability": "SQL Injection",
+        "sources": [
+            "$_GET", 
+            "$_POST", 
+            "$_COOKIE"
+        ],
+        "sanitizers": [
+            "mysql_escape_string", 
+            "mysql_real_escape_string",
+            "pg_escape_string",
+            "pg_escape_bytea"
+        ],
+        "sinks": [
+            "dba_open",
+            "dba_popen",
+            "dba_insert",
+            "dba_fetch",
+            "dba_delete",
+            "mysql_db_query",
+            "mysql_query",
+            "mysql_unbuffered_query",
+            "pg_query",
+            "pg_send_query",
+            "pg_send_query_params",
+            "pg_send_prepare",
+            "pg_prepare"
+        ],
+        "implicit": "no"
+    },
+    {
+        "vulnerability": "File Inclusion",
+        "sources": [
+            "$_GET", 
+            "$_POST", 
+            "$_COOKIE"
+        ],
+        "sanitizers": [
+            "allow_url_fopen",
+            "allow_url_include"
+        ],
+        "sinks": [
+            "include",
+            "include_once",
+            "require",
+            "require_once",
+            "fopen",
+            "file_get_contents"
+        ],
+        "implicit": "no"
+    },
+    {
+        "vulnerability": "Command Injection",
+        "sources": [
+            "$_GET", 
+            "$_POST", 
+            "$_COOKIE"
+        ],
+        "sanitizers": [
+        ],
+        "sinks": [
+            "exec",
+            "popen",
+            "system",
+            "shell_exec"
+        ],
+        "implicit": "no"
+    },
+    {
+        "vulnerability": "PHP Object Injection",
+        "sources": [
+            "$_GET", 
+            "$_POST", 
+            "$_COOKIE"
+        ],
+        "sanitizers": [
+
+        ],
+        "sinks": [
+            "unserialize",
+            "yaml_parse"
+        ],
+        "implicit": "yes"
+    }
+]

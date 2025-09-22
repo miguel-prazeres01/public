@@ -1,0 +1,469 @@
+[
+    {
+        "nodeType": "Stmt_If",
+        "cond": {
+            "nodeType": "Expr_BinaryOp_Greater",
+            "left": {
+                "nodeType": "Expr_Variable",
+                "name": "c",
+                "attributes": {
+                    "startLine": 3,
+                    "endLine": 3
+                }
+            },
+            "right": {
+                "nodeType": "Scalar_LNumber",
+                "value": 0,
+                "attributes": {
+                    "startLine": 3,
+                    "endLine": 3,
+                    "rawValue": "0",
+                    "kind": 10
+                }
+            },
+            "attributes": {
+                "startLine": 3,
+                "endLine": 3
+            }
+        },
+        "stmts": [
+            {
+                "nodeType": "Stmt_Expression",
+                "expr": {
+                    "nodeType": "Expr_Assign",
+                    "var": {
+                        "nodeType": "Expr_Variable",
+                        "name": "a",
+                        "attributes": {
+                            "startLine": 4,
+                            "endLine": 4
+                        }
+                    },
+                    "expr": {
+                        "nodeType": "Expr_FuncCall",
+                        "name": {
+                            "nodeType": "Name",
+                            "parts": [
+                                "b"
+                            ],
+                            "attributes": {
+                                "startLine": 4,
+                                "endLine": 4
+                            }
+                        },
+                        "args": [],
+                        "attributes": {
+                            "startLine": 4,
+                            "endLine": 4
+                        }
+                    },
+                    "attributes": {
+                        "startLine": 4,
+                        "endLine": 4
+                    }
+                },
+                "attributes": {
+                    "startLine": 4,
+                    "endLine": 4
+                }
+            },
+            {
+                "nodeType": "Stmt_If",
+                "cond": {
+                    "nodeType": "Expr_BinaryOp_Smaller",
+                    "left": {
+                        "nodeType": "Expr_Variable",
+                        "name": "c",
+                        "attributes": {
+                            "startLine": 5,
+                            "endLine": 5
+                        }
+                    },
+                    "right": {
+                        "nodeType": "Scalar_LNumber",
+                        "value": 3,
+                        "attributes": {
+                            "startLine": 5,
+                            "endLine": 5,
+                            "rawValue": "3",
+                            "kind": 10
+                        }
+                    },
+                    "attributes": {
+                        "startLine": 5,
+                        "endLine": 5
+                    }
+                },
+                "stmts": [
+                    {
+                        "nodeType": "Stmt_Expression",
+                        "expr": {
+                            "nodeType": "Expr_Assign",
+                            "var": {
+                                "nodeType": "Expr_Variable",
+                                "name": "a",
+                                "attributes": {
+                                    "startLine": 6,
+                                    "endLine": 6
+                                }
+                            },
+                            "expr": {
+                                "nodeType": "Expr_FuncCall",
+                                "name": {
+                                    "nodeType": "Name",
+                                    "parts": [
+                                        "f"
+                                    ],
+                                    "attributes": {
+                                        "startLine": 6,
+                                        "endLine": 6
+                                    }
+                                },
+                                "args": [
+                                    {
+                                        "nodeType": "Arg",
+                                        "name": null,
+                                        "value": {
+                                            "nodeType": "Expr_Variable",
+                                            "name": "a",
+                                            "attributes": {
+                                                "startLine": 6,
+                                                "endLine": 6
+                                            }
+                                        },
+                                        "byRef": false,
+                                        "unpack": false,
+                                        "attributes": {
+                                            "startLine": 6,
+                                            "endLine": 6
+                                        }
+                                    }
+                                ],
+                                "attributes": {
+                                    "startLine": 6,
+                                    "endLine": 6
+                                }
+                            },
+                            "attributes": {
+                                "startLine": 6,
+                                "endLine": 6
+                            }
+                        },
+                        "attributes": {
+                            "startLine": 6,
+                            "endLine": 6
+                        }
+                    }
+                ],
+                "elseifs": [],
+                "else": {
+                    "nodeType": "Stmt_Else",
+                    "stmts": [
+                        {
+                            "nodeType": "Stmt_If",
+                            "cond": {
+                                "nodeType": "Expr_BinaryOp_Equal",
+                                "left": {
+                                    "nodeType": "Expr_Variable",
+                                    "name": "a",
+                                    "attributes": {
+                                        "startLine": 9,
+                                        "endLine": 9
+                                    }
+                                },
+                                "right": {
+                                    "nodeType": "Scalar_LNumber",
+                                    "value": 0,
+                                    "attributes": {
+                                        "startLine": 9,
+                                        "endLine": 9,
+                                        "rawValue": "0",
+                                        "kind": 10
+                                    }
+                                },
+                                "attributes": {
+                                    "startLine": 9,
+                                    "endLine": 9
+                                }
+                            },
+                            "stmts": [
+                                {
+                                    "nodeType": "Stmt_Expression",
+                                    "expr": {
+                                        "nodeType": "Expr_Assign",
+                                        "var": {
+                                            "nodeType": "Expr_Variable",
+                                            "name": "a",
+                                            "attributes": {
+                                                "startLine": 10,
+                                                "endLine": 10
+                                            }
+                                        },
+                                        "expr": {
+                                            "nodeType": "Expr_FuncCall",
+                                            "name": {
+                                                "nodeType": "Name",
+                                                "parts": [
+                                                    "b"
+                                                ],
+                                                "attributes": {
+                                                    "startLine": 10,
+                                                    "endLine": 10
+                                                }
+                                            },
+                                            "args": [],
+                                            "attributes": {
+                                                "startLine": 10,
+                                                "endLine": 10
+                                            }
+                                        },
+                                        "attributes": {
+                                            "startLine": 10,
+                                            "endLine": 10
+                                        }
+                                    },
+                                    "attributes": {
+                                        "startLine": 10,
+                                        "endLine": 10
+                                    }
+                                }
+                            ],
+                            "elseifs": [],
+                            "else": null,
+                            "attributes": {
+                                "startLine": 9,
+                                "endLine": 11
+                            }
+                        },
+                        {
+                            "nodeType": "Stmt_Expression",
+                            "expr": {
+                                "nodeType": "Expr_Assign",
+                                "var": {
+                                    "nodeType": "Expr_Variable",
+                                    "name": "not_initialized",
+                                    "attributes": {
+                                        "startLine": 12,
+                                        "endLine": 12
+                                    }
+                                },
+                                "expr": {
+                                    "nodeType": "Scalar_String",
+                                    "value": "xxx",
+                                    "attributes": {
+                                        "startLine": 12,
+                                        "endLine": 12,
+                                        "kind": 2,
+                                        "rawValue": "\"xxx\""
+                                    }
+                                },
+                                "attributes": {
+                                    "startLine": 12,
+                                    "endLine": 12
+                                }
+                            },
+                            "attributes": {
+                                "startLine": 12,
+                                "endLine": 12
+                            }
+                        }
+                    ],
+                    "attributes": {
+                        "startLine": 8,
+                        "endLine": 13
+                    }
+                },
+                "attributes": {
+                    "startLine": 5,
+                    "endLine": 13
+                }
+            }
+        ],
+        "elseifs": [],
+        "else": {
+            "nodeType": "Stmt_Else",
+            "stmts": [
+                {
+                    "nodeType": "Stmt_Expression",
+                    "expr": {
+                        "nodeType": "Expr_Assign",
+                        "var": {
+                            "nodeType": "Expr_Variable",
+                            "name": "a",
+                            "attributes": {
+                                "startLine": 17,
+                                "endLine": 17
+                            }
+                        },
+                        "expr": {
+                            "nodeType": "Scalar_String",
+                            "value": "x",
+                            "attributes": {
+                                "startLine": 17,
+                                "endLine": 17,
+                                "kind": 2,
+                                "rawValue": "\"x\""
+                            }
+                        },
+                        "attributes": {
+                            "startLine": 17,
+                            "endLine": 17
+                        }
+                    },
+                    "attributes": {
+                        "startLine": 17,
+                        "endLine": 17
+                    }
+                },
+                {
+                    "nodeType": "Stmt_Expression",
+                    "expr": {
+                        "nodeType": "Expr_Assign",
+                        "var": {
+                            "nodeType": "Expr_Variable",
+                            "name": "c",
+                            "attributes": {
+                                "startLine": 18,
+                                "endLine": 18
+                            }
+                        },
+                        "expr": {
+                            "nodeType": "Expr_FuncCall",
+                            "name": {
+                                "nodeType": "Name",
+                                "parts": [
+                                    "d"
+                                ],
+                                "attributes": {
+                                    "startLine": 18,
+                                    "endLine": 18
+                                }
+                            },
+                            "args": [
+                                {
+                                    "nodeType": "Arg",
+                                    "name": null,
+                                    "value": {
+                                        "nodeType": "Expr_Variable",
+                                        "name": "a",
+                                        "attributes": {
+                                            "startLine": 18,
+                                            "endLine": 18
+                                        }
+                                    },
+                                    "byRef": false,
+                                    "unpack": false,
+                                    "attributes": {
+                                        "startLine": 18,
+                                        "endLine": 18
+                                    }
+                                }
+                            ],
+                            "attributes": {
+                                "startLine": 18,
+                                "endLine": 18
+                            }
+                        },
+                        "attributes": {
+                            "startLine": 18,
+                            "endLine": 18
+                        }
+                    },
+                    "attributes": {
+                        "startLine": 18,
+                        "endLine": 18
+                    }
+                }
+            ],
+            "attributes": {
+                "startLine": 16,
+                "endLine": 19
+            }
+        },
+        "attributes": {
+            "startLine": 3,
+            "endLine": 19
+        }
+    },
+    {
+        "nodeType": "Stmt_Expression",
+        "expr": {
+            "nodeType": "Expr_FuncCall",
+            "name": {
+                "nodeType": "Name",
+                "parts": [
+                    "e"
+                ],
+                "attributes": {
+                    "startLine": 21,
+                    "endLine": 21
+                }
+            },
+            "args": [
+                {
+                    "nodeType": "Arg",
+                    "name": null,
+                    "value": {
+                        "nodeType": "Expr_Variable",
+                        "name": "a",
+                        "attributes": {
+                            "startLine": 21,
+                            "endLine": 21
+                        }
+                    },
+                    "byRef": false,
+                    "unpack": false,
+                    "attributes": {
+                        "startLine": 21,
+                        "endLine": 21
+                    }
+                },
+                {
+                    "nodeType": "Arg",
+                    "name": null,
+                    "value": {
+                        "nodeType": "Expr_Variable",
+                        "name": "c",
+                        "attributes": {
+                            "startLine": 21,
+                            "endLine": 21
+                        }
+                    },
+                    "byRef": false,
+                    "unpack": false,
+                    "attributes": {
+                        "startLine": 21,
+                        "endLine": 21
+                    }
+                }
+            ],
+            "attributes": {
+                "startLine": 21,
+                "endLine": 21
+            }
+        },
+        "attributes": {
+            "startLine": 21,
+            "endLine": 21
+        }
+    },
+    {
+        "nodeType": "Stmt_Nop",
+        "attributes": {
+            "startLine": 25,
+            "comments": [
+                {
+                    "nodeType": "Comment",
+                    "text": "\/\/ tip: sources, sanitizers and sinks can appear inside branches, and they can be nested",
+                    "line": 23,
+                    "filePos": 301,
+                    "tokenPos": 111,
+                    "endLine": 23,
+                    "endFilePos": 388,
+                    "endTokenPos": 111
+                }
+            ],
+            "endLine": 25
+        }
+    }
+]
