@@ -1,0 +1,8 @@
+# ninja log v5
+51	1658	7187225939970406	framework/third_party/fmt/CMakeFiles/fmt.dir/src/os.cc.obj	e22eb42efffb5982
+41	1777	7187225941140648	framework/third_party/fmt/CMakeFiles/fmt.dir/src/format.cc.obj	c0d317952275b32b
+29	3234	7187225955715842	framework/CMakeFiles/CGFramework.dir/src/image.cpp.obj	e8201941dbbd283
+5	2180	7203042588995557	CMakeFiles/a2_warping.dir/src/main.cpp.obj	d4e1a5f3110e0daa
+1778	1914	7187225942490516	framework/third_party/fmt/fmt.lib	c0f62e3179bea9a4
+2180	2451	7203042591235447	a2_warping.exe	72f9684bed053a06
+3235	3318	7187225956575749	framework/CGFramework.lib	4653c7257369a593

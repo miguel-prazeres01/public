@@ -1,0 +1,49 @@
+
+Points are awarded according to the percentage of test cases that you passed.
+In this breakdown the percentages and points are rounded to the nearest 2 decimals.
+The final grade for the assignment is computed without intermediate rounding.
+
+For each exercise we provide a further breakdown into sections to indicate where you may have a made a mistake.
+For each section which was not completely correct we provide one specific case that failed.
+
+
+normalize - passed ~100.00% of the tests (~1.00 points)
+ - test_normalize_1 - Correct
+ - test_normalize_2 - Correct
+ - test_normalize_3 - Correct
+content_loss - passed ~100.00% of the tests (~2.00 points)
+ - test_content_loss_1 - Correct
+ - test_content_loss_2 - Correct
+gram_matrix - passed ~100.00% of the tests (~2.00 points)
+ - test_gram_matrix_1 - Correct
+ - test_gram_matrix_2 - Correct
+style_loss - passed ~50.00% of the tests (~1.00 points)
+ - test_style_loss_1 - Correct
+ - test_style_loss_2 - Not (fully) correct
+total_variation_loss - passed ~100.00% of the tests (~1.00 points)
+ - test_total_variation_loss_1 - Correct
+ - test_total_variation_loss_2 - Correct
+double_optimization - passed ~100.00% of the tests (~1.00 points)
+ - test_double_optimization - Correct
+mask_loss - passed ~100.00% of the tests (~1.00 points)
+ - test_mask_loss - Correct
+nearest_neighbour_search - passed ~100.00% of the tests (~1.00 points)
+ - test_nearest_neighbour_search_1 - Correct
+get_neighbourhood - passed ~50.00% of the tests (~0.50 points)
+ - test_get_neighbourhood_2 - Correct
+ - test_get_neighbourhood_1 - Not (fully) correct
+grid_sampling - passed ~100.00% of the tests (~2.00 points)
+ - test_grid_sampling_1 - Correct
+ - test_grid_sampling_2 - Correct
+
+
+==========================================
+ Examples of failed tests (1 per section) 
+==========================================
+
+style_loss (test_style_loss_2)
+AssertionError: False is not true : Test case: Less Style Layers. 0.010969559662044048 not smaller/equal than 0.01 OR 3450.722900390625 not smaller/equal than 1.0
+
+get_neighbourhood (test_get_neighbourhood_1)
+AssertionError: False is not true : Test case: get_neighbourhood, radius 0
+

@@ -1,0 +1,88 @@
+
+Points are awarded according to the percentage of test cases that you passed.
+In this breakdown the percentages and points are rounded to the nearest 2 decimals.
+The final grade for the assignment is computed without intermediate rounding.
+
+For each exercise we provide a further breakdown into sections to indicate where you may have a made a mistake.
+For each section which was not completely correct we provide one specific case that failed.
+    
+
+getRGBImageMinMax - passed ~50.00% of the tests (~0.50 points)
+ - MemorialImage - Correct
+ - RandomWideRangeImage - Not (fully) correct
+NormalizeRGBImage - passed ~100.00% of the tests (~1.00 points)
+ - MemorialImage - Correct
+ - KitchenImage - Correct
+ - RandomImage - Correct
+ApplyGamma - passed ~100.00% of the tests (~1.00 points)
+ - MemorialNormalized - Correct
+ - KitchenNormalized - Correct
+ - MemorialImage - Correct
+ - RandomImage - Correct
+rgbToLuminance - passed ~100.00% of the tests (~1.00 points)
+ - MemorialImage - Correct
+ - KitchenImage - Correct
+ - RandomImage - Correct
+getGradients - passed ~50.00% of the tests (~1.50 points)
+ - MemorialImage - Correct
+ - KitchenImage - Correct
+ - RandomImage - Not (fully) correct
+ - 1x4Image - Not (fully) correct
+getGradientAttenuation - passed ~100.00% of the tests (~2.00 points)
+ - MemorialImage - Correct
+ - KitchenImage - Correct
+ - RandomImage - Correct
+getAttenuatedDivergence - passed ~75.00% of the tests (~2.25 points)
+ - MemorialImage - Correct
+ - KitchenImage - Correct
+ - RandomImage - Correct
+ - 1x4Image - Not (fully) correct
+solvePoisson - passed ~100.00% of the tests (~3.00 points)
+ - MemorialImage - Correct
+ - KitchenImage - Correct
+ - RandomImage - Correct
+rescaleRGBByLuminance - passed ~100.00% of the tests (~1.00 points)
+ - MemorialImage - Correct
+ - KitchenImage - Correct
+ - RandomImage - Correct
+
+
+==========================================
+ Examples of failed tests (1 per section) 
+==========================================
+
+getRGBImageMinMax (RandomWideRangeImage)
+Input:
+
+Output:
+result
+false
+
+getGradients (RandomImage)
+Input:
+
+Output:
+res == Catch::Approx(0.0f).margin(1e-2f)
+0.07004f == Approx( 0.0 )
+
+getGradients (1x4Image)
+Input:
+
+Output:
+all_zero
+false
+
+getAttenuatedDivergence (1x4Image)
+Input:
+
+Output:
+calcImageRMSE(output, user_output) == Catch::Approx(0.0f).margin(1e-2f)
+0.13662f == Approx( 0.0 )
+
+==========================================
+Open MP Points
+==========================================
+
+Task OpenMP_1: 1/1
+Task OpenMP_2: 0.5/1
+OpenMP comment: Too many parallels
