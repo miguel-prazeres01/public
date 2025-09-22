@@ -1,0 +1,21 @@
+
+Run Docker: 
+docker run --rm -v $PWD:/home/klee/klee_src/examples/lab09 -ti --ulimit='stack=-1:-1' klee/klee
+
+Compile for Klee: 
+clang -I ../../include -emit-llvm -c -g -O0 -Xclang -disable-O0-optnone source.c
+
+Linking for Klee:
+llvm-link-11 -o prog source1.bc source2.bc
+
+Generate concrete Example: 
+ktest-tool klee-last/test000001.ktest
+
+
+Compile for clang coverage: 
+clang -fprofile-instr-generate -fcoverage-mapping Ex1_concrete.c -o Ex1
+
+Generate coverage report: 
+LLVM_PROFILE_FILE="Ex1.profraw" ./Ex1
+llvm-profdata merge -sparse Ex1.profraw  -o Ex1.profdata
+llvm-cov show ./Ex1 -instr-profile=Ex1.profdata  -show-line-counts-or-regions

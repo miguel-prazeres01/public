@@ -1,0 +1,10 @@
+[688][      debug] Loading models took 67.335ms
+[689][      debug] Sqlite write daemon: starting up
+[688][   progress] Waiting for Sqlite write daemon to start (0.200000 seconds)
+[688][   progress] Waiting for Sqlite write daemon to start (0.400000 seconds)
+[688][   progress] Waiting for Sqlite write daemon to start (0.800000 seconds)
+[688][   progress] Waiting for Sqlite write daemon to start (1.600000 seconds)
+[688][   progress] Waiting for Sqlite write daemon to start (3.200000 seconds)
+[688][   progress] Waiting for Sqlite write daemon to start (6.400000 seconds)
+[688][   progress] Waiting for Sqlite write daemon to start (12.800000 seconds)
+[688][   progress] 

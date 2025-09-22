@@ -1,0 +1,543 @@
+/home/klee/klee_src/examples/P2BoilerPlate/Ex3.c:
+    1|       |#include "Ex3.h"
+    2|       |#include<stdlib.h>
+    3|       |#include<stdio.h>
+    4|       |#include<assert.h>
+    5|       |
+    6|     42|Node makeNode(int pri, int v) {
+    7|     42|	Node n = (Node)malloc(sizeof(struct NodeS)); 
+    8|     42|	n->pri = pri; 
+    9|     42|	n->data = v; 
+   10|     42|	n->next = NULL;
+   11|     42|	return n; 
+   12|     42|}
+   13|       |
+   14|     14|Node insertPVPair(Node n1, Node n2) { 
+   15|     14|	if ((n1 == NULL) || (n1->pri < n2->pri)) {
+   16|      5|		n2->next = n1;
+   17|      5|		return n2; 
+   18|      9|	} else {
+   19|      9|		Node prev = n1; 
+   20|      9|		Node cur = n1->next; 
+   21|      9|		
+   22|     11|		while (cur != NULL && cur->pri >= n2->pri) {
+                                      ^6
+   23|      2|			prev = cur; 
+   24|      2|			cur = cur->next; 
+   25|      2|		}
+   26|      9|		
+   27|      9|		prev->next = n2; 
+   28|      9|		n2->next = cur; 
+   29|      9|		return n1; 
+   30|      9|	}
+   31|     14|}
+   32|       |
+   33|     22|Node removeNode(Node n1, Node n2) {
+   34|     22|	if (n1 == n2) {
+   35|     12|		return n1->next;
+   36|     12|	} else {
+   37|     10|		if (n1->next == NULL) {
+   38|      1|			return n1; 
+   39|      9|		} else {
+   40|      9|			Node aux = removeNode(n1->next, n2);
+   41|      9|			n1->next = aux; 
+   42|      9|			return n1; 
+   43|      9|		}
+   44|     10|	}
+   45|     22|}
+   46|       |
+   47|     69|int validPVList(Node n){
+   48|     69|	if(n == NULL){
+   49|      0|		return 1;
+   50|      0|	}
+   51|     69|
+   52|     69|	if (n->next == NULL){
+   53|     37|		if (n->pri < 0) return 0;
+                                ^0
+   54|     37|		return 1;
+   55|     37|	} 
+   56|     32|	Node prev = n;
+   57|     32|	Node cur = n->next;
+   58|     32|
+   59|     76|	while (cur != NULL){
+   60|     44|		if(cur->pri < 0){
+   61|      0|			return 0;
+   62|      0|		}
+   63|     44|
+   64|     44|		if(prev->pri < cur->pri){
+   65|      0|			return 0;
+   66|      0|		}
+   67|     44|		prev = cur;
+   68|     44|		cur = cur->next;
+   69|     44|	}
+   70|     32|
+   71|     32|	return 1;
+   72|     32|}
+   73|       |
+   74|       |
+   75|      8|Queue makeQueue() {
+   76|      8|	Queue q = (Queue)malloc(sizeof(struct QueueS));
+   77|      8|	q->fst = NULL;
+   78|      8|	q->last = NULL;
+   79|      8|	q->count = 0;
+   80|      8|	q->priHead = -1; 
+   81|      8|	q->priLast = -1; 
+   82|      8|	return q; 
+   83|      8|}
+   84|       |
+   85|     22|void enqueue (Queue q, int pri, int v) {
+   86|     22|	Node n = makeNode(pri, v);
+   87|     22|	if (q->count == 0) {
+   88|      8|		q->fst = n; 
+   89|      8|		q->last = n;
+   90|      8|		q->priHead = pri;
+   91|      8|		q->priLast = pri;
+   92|      8|		q->count++; 
+   93|     14|	} else if (q->priHead < pri) {
+   94|      6|		n->next = q->fst;
+   95|      6|		q->fst = n; 
+   96|      6|		q->count++; 
+   97|      6|		q->priHead = pri; 
+   98|      8|	} else if (q->priLast >= pri) {
+   99|      6|		q->last->next = n; 
+  100|      6|		q->last = n; 
+  101|      6|		q->count++; 
+  102|      6|		q->priLast = pri;  
+  103|      6|	} else {
+  104|      2|		insertPVPair(q->fst, n);
+  105|      2|		q->count++; 
+  106|      2|	}
+  107|     22|}
+  108|       |
+  109|      6|Node dequeue (Queue q) {
+  110|      6|	if (q->count == 0) {
+  111|      2|		return NULL;
+  112|      4|	} else {
+  113|      4|		Node ret = q->fst;
+  114|      4|		if (q->count == 1) {
+  115|      2|			q->fst = NULL; 
+  116|      2|			q->last = NULL;
+  117|      2|			q->count = 0; 
+  118|      2|			q->priHead = -1; 
+  119|      2|			q->priLast = -1; 
+  120|      2|		} else {
+  121|      2|			q->fst = q->fst->next; 
+  122|      2|			q->count--; 
+  123|      2|			q->priHead = q->fst->pri; 
+  124|      2|		}
+  125|      4|		return ret; 
+  126|      4|	}
+  127|      6|}
+  128|       |
+  129|       |
+  130|     36|int validQueue(Queue q){
+  131|     36|	if(q->fst == NULL){
+  132|     12|		if(q->count != 0 || q->last!=NULL || q->priHead != -1 || q->priLast != -1){
+  133|      0|			return 0;
+  134|      0|		}
+  135|     12|		return 1;
+  136|     12|	} 
+  137|     24|	if (validPVList(q->fst) == 0){
+  138|      0|		return 0;
+  139|      0|	}
+  140|     24|
+  141|     24|	Node cur = q->fst;
+  142|     24|	int count = 1;
+  143|     44|	while (cur->next != NULL){
+  144|     20|		cur = cur->next;
+  145|     20|		count++;
+  146|     20|	}
+  147|     24|	if(q->last!= cur || q->count != count || q->priHead != q->fst->pri || q->priLast != cur->pri){
+  148|      0|		return 0;
+  149|      0|	}
+  150|     24|
+  151|     24|	return 1;
+  152|     24|}
+
+/home/klee/klee_src/examples/P2BoilerPlate/Ex3ConcTestSuite/Ex3AllTests.c:
+    1|       |#include "../Ex3.h"
+    2|       |#include "klee/klee.h"
+    3|       |#include <assert.h>
+    4|       |#include "Ex3TestConc1.c"
+    5|       |#include "Ex3TestConc2.c"
+    6|       |#include "Ex3TestConc3.c"
+    7|       |#include "Ex3TestConc4.c"
+    8|       |
+    9|       |
+   10|       |
+   11|      1|int main() {
+   12|      1|    test11();
+   13|      1|    test12();
+   14|      1|    test13();
+   15|      1|    test14();
+   16|      1|    test15();
+   17|      1|    test16();
+   18|      1|
+   19|      1|    test21();
+   20|      1|
+   21|      1|    test31();
+   22|      1|    test32();
+   23|      1|    test33();
+   24|      1|    test34();
+   25|      1|    test35();
+   26|      1|    test36();
+   27|      1|
+   28|      1|    test41();
+   29|      1|    test42();
+   30|      1|
+   31|      1|
+   32|      1|}
+
+/home/klee/klee_src/examples/P2BoilerPlate/Ex3ConcTestSuite/Ex3TestConc1.c:
+    1|       |#include "../Ex3.h"
+    2|       |#include "klee/klee.h"
+    3|       |#include <assert.h>
+    4|       |
+    5|       |
+    6|       |/**
+    7|       | * Property: Se criarmos uma lista ela deve ser válida.
+    8|       | * 
+    9|       | * adicionarmos um node válido a uma priority-value list válida, ela deve
+   10|       | * permanecer válida  
+   11|       | */
+   12|       |
+   13|      1|void test11(){
+   14|      1|    int pri1=0, pri2=128 , data1=0, data2=0;
+   15|      1|    int pri3=16384, data3=0;
+   16|      1|
+   17|      1|
+   18|      1|    Node n1 = makeNode(pri1,data1);
+   19|      1|    Node n2 = makeNode(pri2,data2);
+   20|      1|    Node n3 = makeNode(pri3,data3);
+   21|      1|    
+   22|      1|    assert(validPVList(n1) && validPVList(n2) && validPVList(n3));
+   23|      1|
+   24|      1|    n1 = insertPVPair(n1,n2);
+   25|      1|    assert (validPVList(n1));
+   26|      1|
+   27|      1|    n1 = insertPVPair(n1,n3);
+   28|      1|    assert (validPVList(n1));
+   29|      1|
+   30|      1|    n1 = removeNode(n1,n2);
+   31|      1|    assert (validPVList(n1));
+   32|      1|
+   33|      1|    n1 = removeNode(n1,n3);
+   34|      1|    assert (validPVList(n1));     
+   35|      1|}
+   36|       |
+   37|      1|void test12(){
+   38|      1|    int pri1=0, pri2=16384 , data1=0, data2=0;
+   39|      1|    int pri3=128, data3=0;
+   40|      1|
+   41|      1|
+   42|      1|    Node n1 = makeNode(pri1,data1);
+   43|      1|    Node n2 = makeNode(pri2,data2);
+   44|      1|    Node n3 = makeNode(pri3,data3);
+   45|      1|    
+   46|      1|    assert(validPVList(n1) && validPVList(n2) && validPVList(n3));
+   47|      1|
+   48|      1|    n1 = insertPVPair(n1,n2);
+   49|      1|    assert (validPVList(n1));
+   50|      1|
+   51|      1|    n1 = insertPVPair(n1,n3);
+   52|      1|    assert (validPVList(n1));
+   53|      1|
+   54|      1|    n1 = removeNode(n1,n2);
+   55|      1|    assert (validPVList(n1));
+   56|      1|
+   57|      1|    n1 = removeNode(n1,n3);
+   58|      1|    assert (validPVList(n1)); 
+   59|      1|}
+   60|       |
+   61|      1|void test13(){
+   62|      1|    int pri1=0, pri2=0 , data1=0, data2=0;
+   63|      1|    int pri3=2147483647, data3=0;
+   64|      1|
+   65|      1|
+   66|      1|    Node n1 = makeNode(pri1,data1);
+   67|      1|    Node n2 = makeNode(pri2,data2);
+   68|      1|    Node n3 = makeNode(pri3,data3);
+   69|      1|    
+   70|      1|    assert(validPVList(n1) && validPVList(n2) && validPVList(n3));
+   71|      1|
+   72|      1|    n1 = insertPVPair(n1,n2);
+   73|      1|    assert (validPVList(n1));
+   74|      1|
+   75|      1|    n1 = insertPVPair(n1,n3);
+   76|      1|    assert (validPVList(n1));
+   77|      1|
+   78|      1|    n1 = removeNode(n1,n2);
+   79|      1|    assert (validPVList(n1));
+   80|      1|
+   81|      1|    n1 = removeNode(n1,n3);
+   82|      1|    assert (validPVList(n1)); 
+   83|      1|}
+   84|       |
+   85|      1|void test14(){
+   86|      1|    int pri1=0, pri2=2147483647 , data1=0, data2=0;
+   87|      1|    int pri3=0, data3=0;
+   88|      1|
+   89|      1|
+   90|      1|    Node n1 = makeNode(pri1,data1);
+   91|      1|    Node n2 = makeNode(pri2,data2);
+   92|      1|    Node n3 = makeNode(pri3,data3);
+   93|      1|    
+   94|      1|    assert(validPVList(n1) && validPVList(n2) && validPVList(n3));
+   95|      1|
+   96|      1|    n1 = insertPVPair(n1,n2);
+   97|      1|    assert (validPVList(n1));
+   98|      1|
+   99|      1|    n1 = insertPVPair(n1,n3);
+  100|      1|    assert (validPVList(n1));
+  101|      1|
+  102|      1|    n1 = removeNode(n1,n2);
+  103|      1|    assert (validPVList(n1));
+  104|      1|
+  105|      1|    n1 = removeNode(n1,n3);
+  106|      1|    assert (validPVList(n1)); 
+  107|      1|}
+  108|       |
+  109|      1|void test15(){
+  110|      1|    int pri1=2147483647, pri2=0 , data1=0, data2=0;
+  111|      1|    int pri3=0, data3=0;
+  112|      1|
+  113|      1|
+  114|      1|    Node n1 = makeNode(pri1,data1);
+  115|      1|    Node n2 = makeNode(pri2,data2);
+  116|      1|    Node n3 = makeNode(pri3,data3);
+  117|      1|    
+  118|      1|    assert(validPVList(n1) && validPVList(n2) && validPVList(n3));
+  119|      1|
+  120|      1|    n1 = insertPVPair(n1,n2);
+  121|      1|    assert (validPVList(n1));
+  122|      1|
+  123|      1|    n1 = insertPVPair(n1,n3);
+  124|      1|    assert (validPVList(n1));
+  125|      1|
+  126|      1|    n1 = removeNode(n1,n2);
+  127|      1|    assert (validPVList(n1));
+  128|      1|
+  129|      1|    n1 = removeNode(n1,n3);
+  130|      1|    assert (validPVList(n1)); 
+  131|      1|}
+  132|       |
+  133|      1|void test16(){
+  134|      1|    int pri1=16777216, pri2=2 , data1=0, data2=0;
+  135|      1|    int pri3=16777216, data3=0;
+  136|      1|
+  137|      1|
+  138|      1|    Node n1 = makeNode(pri1,data1);
+  139|      1|    Node n2 = makeNode(pri2,data2);
+  140|      1|    Node n3 = makeNode(pri3,data3);
+  141|      1|    
+  142|      1|    assert(validPVList(n1) && validPVList(n2) && validPVList(n3));
+  143|      1|
+  144|      1|    n1 = insertPVPair(n1,n2);
+  145|      1|    assert (validPVList(n1));
+  146|      1|
+  147|      1|    n1 = insertPVPair(n1,n3);
+  148|      1|    assert (validPVList(n1));
+  149|      1|
+  150|      1|    n1 = removeNode(n1,n2);
+  151|      1|    assert (validPVList(n1));
+  152|      1|
+  153|      1|    n1 = removeNode(n1,n3);
+  154|      1|    assert (validPVList(n1)); 
+  155|      1|}
+
+/home/klee/klee_src/examples/P2BoilerPlate/Ex3ConcTestSuite/Ex3TestConc2.c:
+    1|       |#include "../Ex3.h"
+    2|       |#include "klee/klee.h"
+    3|       |#include <assert.h>
+    4|       |
+    5|       |
+    6|       |
+    7|      1|void test21(){
+    8|      1|    int pri1=2147483647, pri2=2147483647 , data1=0, data2=0;
+    9|      1|
+   10|      1|
+   11|      1|    Node n1 = makeNode(pri1,data1);
+   12|      1|    Node n2 = makeNode(pri2,data2);
+   13|      1|    
+   14|      1|    assert(validPVList(n1) && validPVList(n2));
+   15|      1|
+   16|      1|    Node aux = n1;
+   17|      1|    n1 = removeNode(n1,n2);
+   18|      1|    assert (validPVList(n1) && n1==aux);      
+   19|      1|}
+   20|       |
+
+/home/klee/klee_src/examples/P2BoilerPlate/Ex3ConcTestSuite/Ex3TestConc3.c:
+    1|       |#include "../Ex3.h"
+    2|       |#include "klee/klee.h"
+    3|       |#include <assert.h>
+    4|       |
+    5|       |
+    6|       |
+    7|      1|void test31(){
+    8|      1|
+    9|      1|    int pri1=0, pri2=128, data1=0, data2=0;
+   10|      1|    int pri3=16484, data3=0;
+   11|      1|
+   12|      1|    Queue q = makeQueue();
+   13|      1|    assert(validQueue(q));
+   14|      1|
+   15|      1|    enqueue(q,pri1,data1);
+   16|      1|    assert(validQueue(q));
+   17|      1|
+   18|      1|    enqueue(q,pri2,data2);
+   19|      1|    assert(validQueue(q));
+   20|      1|
+   21|      1|    enqueue(q,pri3,data3);
+   22|      1|    assert(validQueue(q));
+   23|      1|  
+   24|      1|}
+   25|       |
+   26|      1|void test32(){
+   27|      1|
+   28|      1|    int pri1=0, pri2=0, data1=0, data2=0;
+   29|      1|    int pri3=2147483647, data3=0;
+   30|      1|
+   31|      1|    Queue q = makeQueue();
+   32|      1|    assert(validQueue(q));
+   33|      1|
+   34|      1|    enqueue(q,pri1,data1);
+   35|      1|    assert(validQueue(q));
+   36|      1|
+   37|      1|    enqueue(q,pri2,data2);
+   38|      1|    assert(validQueue(q));
+   39|      1|
+   40|      1|    enqueue(q,pri3,data3);
+   41|      1|    assert(validQueue(q));
+   42|      1|  
+   43|      1|}
+   44|       |
+   45|      1|void test33(){
+   46|      1|
+   47|      1|    int pri1=0, pri2=2147483647, data1=0, data2=0;
+   48|      1|    int pri3=0, data3=0;
+   49|      1|
+   50|      1|    Queue q = makeQueue();
+   51|      1|    assert(validQueue(q));
+   52|      1|
+   53|      1|    enqueue(q,pri1,data1);
+   54|      1|    assert(validQueue(q));
+   55|      1|
+   56|      1|    enqueue(q,pri2,data2);
+   57|      1|    assert(validQueue(q));
+   58|      1|
+   59|      1|    enqueue(q,pri3,data3);
+   60|      1|    assert(validQueue(q));
+   61|      1|  
+   62|      1|}
+   63|       |
+   64|      1|void test34(){
+   65|      1|
+   66|      1|    int pri1=0, pri2=16384, data1=0, data2=0;
+   67|      1|    int pri3=128, data3=0;
+   68|      1|
+   69|      1|    Queue q = makeQueue();
+   70|      1|    assert(validQueue(q));
+   71|      1|
+   72|      1|    enqueue(q,pri1,data1);
+   73|      1|    assert(validQueue(q));
+   74|      1|
+   75|      1|    enqueue(q,pri2,data2);
+   76|      1|    assert(validQueue(q));
+   77|      1|
+   78|      1|    enqueue(q,pri3,data3);
+   79|      1|    assert(validQueue(q));
+   80|      1|  
+   81|      1|}
+   82|       |
+   83|      1|void test35(){
+   84|      1|
+   85|      1|    int pri1=2147483647, pri2=0, data1=0, data2=0;
+   86|      1|    int pri3=0, data3=0;
+   87|      1|
+   88|      1|    Queue q = makeQueue();
+   89|      1|    assert(validQueue(q));
+   90|      1|
+   91|      1|    enqueue(q,pri1,data1);
+   92|      1|    assert(validQueue(q));
+   93|      1|
+   94|      1|    enqueue(q,pri2,data2);
+   95|      1|    assert(validQueue(q));
+   96|      1|
+   97|      1|    enqueue(q,pri3,data3);
+   98|      1|    assert(validQueue(q));
+   99|      1|  
+  100|      1|}
+  101|       |
+  102|      1|void test36(){
+  103|      1|
+  104|      1|    int pri1=16777216, pri2=2, data1=0, data2=0;
+  105|      1|    int pri3=16777216, data3=0;
+  106|      1|
+  107|      1|    Queue q = makeQueue();
+  108|      1|    assert(validQueue(q));
+  109|      1|
+  110|      1|    enqueue(q,pri1,data1);
+  111|      1|    assert(validQueue(q));
+  112|      1|
+  113|      1|    enqueue(q,pri2,data2);
+  114|      1|    assert(validQueue(q));
+  115|      1|
+  116|      1|    enqueue(q,pri3,data3);
+  117|      1|    assert(validQueue(q));
+  118|      1|  
+  119|      1|}
+
+/home/klee/klee_src/examples/P2BoilerPlate/Ex3ConcTestSuite/Ex3TestConc4.c:
+    1|       |#include "../Ex3.h"
+    2|       |#include "klee/klee.h"
+    3|       |#include <assert.h>
+    4|       |
+    5|       |
+    6|      1|void test41(){
+    7|      1|    int pri1=0, data1=0;
+    8|      1|    int pri2=2147483647, data2=0;
+    9|      1|
+   10|      1|    Queue q = makeQueue();
+   11|      1|    assert(validQueue(q));
+   12|      1|
+   13|      1|    enqueue(q,pri1,data1);
+   14|      1|    assert(validQueue(q));
+   15|      1|
+   16|      1|    enqueue(q,pri2,data2);
+   17|      1|    assert(validQueue(q));
+   18|      1|
+   19|      1|    dequeue(q);
+   20|      1|    assert(validQueue(q));
+   21|      1|
+   22|      1|    dequeue(q);
+   23|      1|    assert(validQueue(q));
+   24|      1|
+   25|      1|    dequeue(q);
+   26|      1|    assert(validQueue(q));
+   27|      1|}
+   28|       |
+   29|      1|void test42(){
+   30|      1|    int pri1=2147483647, data1=0;
+   31|      1|    int pri2=0, data2=0;
+   32|      1|
+   33|      1|    Queue q = makeQueue();
+   34|      1|    assert(validQueue(q));
+   35|      1|
+   36|      1|    enqueue(q,pri1,data1);
+   37|      1|    assert(validQueue(q));
+   38|      1|
+   39|      1|    enqueue(q,pri2,data2);
+   40|      1|    assert(validQueue(q));
+   41|      1|
+   42|      1|    dequeue(q);
+   43|      1|    assert(validQueue(q));
+   44|      1|
+   45|      1|    dequeue(q);
+   46|      1|    assert(validQueue(q));
+   47|      1|
+   48|      1|    dequeue(q);
+   49|      1|    assert(validQueue(q));
+   50|      1|}
+   51|       |
+
