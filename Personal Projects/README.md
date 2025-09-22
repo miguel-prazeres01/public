@@ -1,0 +1,3 @@
+# CPMinde - Website for reserving and purchasing theater tickets for a small non profit theater group
+
+This was a project done in two weeks, for a friend in need. He needed a small website to anounce theaters and the ability to reserve and buy tickets online. This website was developed with Javascript + React for the frontend and Java Quarkus for the backend (another friend helped a bit with the backend). 

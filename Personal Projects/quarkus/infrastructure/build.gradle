@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'io.quarkus' version "${quarkusVersion}"
+}
+
+ext {
+    quarkusVersion = '3.7.1'
+    mapstructVersion = '1.5.5.Final'
+    mockitoVersion = '5.12.0'
+    byteBuddyVersion = '1.17.0'
+    lombokVersion = '1.18.32'
+    awaitilityVersion = '4.2.0'
+    keycloakVersion = '26.0.4'
+}
+
+
+dependencies {
+
+    implementation project(':domain')
+    implementation project(':application')
+
+    // Hibernate Validator (implementação da spec Jakarta Validation)
+    implementation 'org.hibernate.validator:hibernate-validator:8.0.1.Final'
+    implementation 'jakarta.validation:jakarta.validation-api:3.0.2'
+    implementation 'jakarta.persistence:jakarta.persistence-api:3.1.0'
+    implementation 'io.quarkus:quarkus-websockets'
+
+    // Quarkus RESTEasy, Jackson, and database dependencies
+    implementation 'io.quarkus:quarkus-hibernate-orm'
+    implementation 'io.quarkus:quarkus-hibernate-orm-panache'
+    implementation 'io.quarkus:quarkus-jdbc-postgresql'
+    implementation 'io.quarkus:quarkus-smallrye-openapi'
+    implementation 'io.quarkus:quarkus-resteasy-reactive'
+    implementation 'io.quarkus:quarkus-smallrye-jwt'
+    implementation 'io.quarkus:quarkus-smallrye-health'
+    implementation 'io.quarkus:quarkus-resteasy-reactive-jackson'
+    implementation 'org.dbunit:dbunit:2.7.3'
+
+    implementation("io.quarkus:quarkus-scheduler")
+    
+    implementation 'com.fasterxml.jackson.core:jackson-databind'
+
+    implementation 'com.googlecode.libphonenumber:libphonenumber:8.13.16'
+    testImplementation 'org.dbunit:dbunit:2.7.3'
+
+    // MapStruct
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
+
+    implementation "com.brevo:brevo:1.0.0"
+
+    // Quarkus testing dependencies
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation 'io.quarkus:quarkus-test-h2'
+    testImplementation 'io.rest-assured:rest-assured'
+    testImplementation 'io.quarkus:quarkus-test-common'
+    testImplementation 'com.github.database-rider:rider-core:1.44.0'
+    testImplementation 'com.github.database-rider:rider-cdi:1.44.0'
+    testImplementation 'com.github.database-rider:rider-junit5:1.44.0'
+    testImplementation "com.github.database-rider:rider-cdi:1.41.1:jakarta"   // brings in the CDI interceptor
+    testImplementation "com.github.database-rider:rider-core:1.41.1:jakarta"  // rider core against Jakarta APIs
+
+    // Mockito and Byte Buddy for tests
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    implementation group: 'net.bytebuddy', name: 'byte-buddy', version: "${byteBuddyVersion}"
+
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+
+    testImplementation "org.awaitility:awaitility:${awaitilityVersion}"
+
+    testCompileOnly 'org.projectlombok:lombok:1.18.32'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.32'
+
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+}

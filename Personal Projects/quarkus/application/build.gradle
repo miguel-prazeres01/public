@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+ext {
+    commonsLangVersion = '3.12.0'
+    mapstructVersion = '1.5.5.Final'
+    lombokVersion = '1.18.32'
+    lombokMapstructBindingVersion = '0.2.0'
+    junitVersion = '5.8.2'
+    mockitoVersion = '5.12.0'
+    byteBuddyVersion = '1.17.0'
+}
+
+dependencies {
+    implementation project(':domain')
+
+    // Quarkus RESTEasy and related dependencies
+    implementation 'io.quarkus:quarkus-resteasy-reactive'
+    implementation 'io.quarkus:quarkus-arc'
+
+    // Apache Commons Lang
+    implementation "org.apache.commons:commons-lang3:${commonsLangVersion}"
+
+    // Hibernate Validator
+    implementation 'io.quarkus:quarkus-hibernate-validator'
+
+    // MapStruct and Lombok
+    implementation "org.mapstruct:mapstruct:${mapstructVersion}"
+    compileOnly "org.projectlombok:lombok:${lombokVersion}"
+    annotationProcessor "org.projectlombok:lombok:${lombokVersion}"
+    implementation "org.projectlombok:lombok-mapstruct-binding:${lombokMapstructBindingVersion}"
+
+    // Quarkus testing dependencies
+    testImplementation 'io.quarkus:quarkus-junit5'
+    testImplementation "org.junit.jupiter:junit-jupiter-api:${junitVersion}"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+
+    // Mockito for testing
+    testImplementation "org.mockito:mockito-core:${mockitoVersion}"
+    testImplementation "org.mockito:mockito-junit-jupiter:${mockitoVersion}"
+
+    // Byte Buddy for tests
+    testImplementation "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
+}

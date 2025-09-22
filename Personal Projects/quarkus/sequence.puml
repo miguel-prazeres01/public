@@ -1,0 +1,19 @@
+@startuml
+
+FE -> BE : botao reservar
+BE -> BE : reservar lugar (muda estado para em reserva)
+BE -> FE : return token
+FE -> BE : iniciar pagamento (input: dados da pessoa + token)
+BE -> EU_Pago_Client : mandar mbway
+BE -> FE : Pagamento iniciado
+FE -> FE : espera pelo pagamento processado
+EU_Pago_Client -> mbway : manda
+mbway -> EU_Pago_Client : pagar
+EU_Pago_Client -> BE : notificação ta pago
+BE -> BE : marca como ocupado
+BE -> BE : envia email
+BE -> Websocket : envia notficacao pagamento
+Websocket -> FE : ta pago
+FE -> FE : atualiza e ta pago
+
+@enduml
