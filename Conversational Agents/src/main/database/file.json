@@ -1,0 +1,6 @@
+{"is_advanced_version":null,
+  "session":1,
+  "physical":{"age":22,"gender":"male"},
+  "goals":{"tiredness_goal":0,"hours_needed_to_get_ready":0.5},
+  "memories":[{"date":"2024-01-22","tiredness":3,"irritability":4,"stressful_day_rating":3,"bedtime":"22:00","time_of_waking_up":"07:00","end_time_of_last_appointment":"09:00","time_of_first_appointment":"17:00"}],
+  "future_schedule":[{"date":"2024-01-25","end_time_of_last_appointment":"10:00","time_of_first_appointment":"09:00","stressful_day_rating":3}]}
